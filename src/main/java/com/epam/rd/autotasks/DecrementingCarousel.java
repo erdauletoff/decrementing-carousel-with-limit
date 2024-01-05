@@ -1,32 +1,33 @@
 package com.epam.rd.autotasks;
 
-public class DecrementingCarousel {
-    static int[] carouselArray;
-    static int capacity;
-    private boolean isCarouselRunning = false;
-    private int carouselRunCounter = 0;
-    int counter = 0;
-
+public class DecrementingCarousel  {
+    static int[] carousel;
+    int i;
+    boolean carouselGo = false;
     public DecrementingCarousel(int capacity) {
-        DecrementingCarousel.capacity = capacity;
-        carouselArray = new int[capacity];
+        i = 0;
+        carousel = new int[capacity];
+
     }
 
     public boolean addElement(int element){
-        if (counter < capacity && element > 0 && !isCarouselRunning) {
-            carouselArray[counter] = element;
-            counter++;
-            return true;
-        }
-        return false;
+        boolean gotIt;
+
+        if(element > 0 && i < carousel.length && !carouselGo){
+            carousel[i] = element;
+            i++;
+            gotIt = true;
+        } else gotIt=false;
+        return gotIt;
     }
 
+
     public CarouselRun run(){
-        if (carouselRunCounter == 0) {
-            isCarouselRunning = true;
-            carouselRunCounter++;
+        if (!carouselGo ){
+            carouselGo = true;
             return new CarouselRun();
         }
         return null;
     }
+
 }
