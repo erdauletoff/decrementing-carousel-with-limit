@@ -1,13 +1,25 @@
 package com.epam.rd.autotasks;
 
 public class CarouselRun {
+    int position = 0;
+    private final int[] decrementingArray = DecrementingCarousel.carouselArray;
+
 
     public int next() {
-       throw new UnsupportedOperationException();
+        int count = 0;
+        while (count < decrementingArray.length && decrementingArray[position %= decrementingArray.length] <= 0) {
+            position++;
+            count++;
+        }
+        if (count == decrementingArray.length) return -1;
+        return decrementingArray[position++]--;
     }
 
     public boolean isFinished() {
-        throw new UnsupportedOperationException();
+        for (int var: decrementingArray) {
+            if (var > 0) return false;
+        }
+        return true;
     }
 
 }
